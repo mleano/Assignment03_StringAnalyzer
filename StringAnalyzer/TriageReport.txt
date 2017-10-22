@@ -1,0 +1,196 @@
+Author: Marlene Leano
+Date: 10/21/2017
+
+Assignment03
+This is a Triage Report for my StringAnalyzer App.
+
+
+=======================================================================================================
+
+SYSTEM INFORMATION (same for all bugs)
+─	Used emulator: Nexus 5X API 25
+
+=======================================================================================================
+
+*** BUG NO. 1 ***
+
+DESCRIPTION OF THE ISSUE
+─	App crashes when you hit submit (Critical)
+
+REPRO STEPS
+    Steps
+    1.	Enter a message
+    2.	Click Submit
+
+    Actual Results:
+    ─	App crashes and shuts down
+
+    Expected Results
+    ─	Entered message and analyzed. Analysis is shown in another view.
+
+LOCATION OF THE BUG IN THE CODE
+─	Android Monitor states at co.miniforge.corey.stringanalyzer.
+    InputActivity$1.onClick(InputActivity.java:37)
+─	But bug actually at line 35 of InputActivity
+─	Changing this file will affect what string will be sent to AnalyzerActivity.java (and therefore TextAnalyzerUtil.java)
+─	Changing this file should not break the other files
+
+DATE/TIME OF THE FIX & COMMIT LINK
+─	10/19/2017, 6:15pm, https://github.com/mleano/Assignment03_StringAnalyzer/commit/bbfbb92ea45d6f3f1566deb53dfd5803bedd6323
+    o	in InputActivity.java line 35, changed TextAnalyzerUtil.class to AnalyzerActivity.class
+
+=======================================================================================================
+
+*** BUG NO. 2 ***
+
+DESCRIPTION OF THE ISSUE
+─	You can submit an empty message (Low)
+
+REPRO STEPS
+    Steps
+    1.	Click Submit without entering a message
+
+    Actual Results:
+    ─	New view is shown showing the analysis of an empty string
+
+    Expected Results
+    ─	App informs you to enter a message without moving to the analysis view
+
+LOCATION OF THE BUG IN THE CODE
+─	Bug is in InputActivity.java, line 36. The input is passed into the intent, but it is not validated.
+─	Changing this file will affect what string will be sent to AnalyzerActivity.java (and therefore TextAnalyzerUtil.java)
+─	Changing this file should not break the other files
+
+DATE/TIME OF THE FIX & COMMIT LINK
+─	10/21/2017, 10:15pm, https://github.com/mleano/Assignment03_StringAnalyzer/commit/b1b420787309879cbc12f80d9544e563d294e6ff
+    o	Wrote function to validate input, making sure an input was made
+    o	If no input was entered, show a message in toast to enter a message
+
+=======================================================================================================
+
+*** BUG NO. 3 ***
+
+DESCRIPTION OF THE ISSUE
+─	Some of the metrics are not updating with new data (normal)
+
+REPRO STEPS
+    Entering “hello”
+        Steps
+        1.	Enter “hello”
+        2.	Click Submit button
+
+        Actual Results:
+        ─	Character Count: 5
+        ─	Word Count: 1
+        ─	Unique Characters: 4
+        ─	TextView
+        ─	TextView
+        ─	Special Characters: 0
+
+        Expected Results
+        ─	Character Count: 5
+        ─	Word Count: 1
+        ─	Unique Characters: 4
+        ─	Unique Words: 1
+        ─	Longest Word: hello
+        ─	Special Characters: 0
+
+    Entering “hello, world”
+        Steps
+        1.	Enter “hello, world”
+        2.	Click Submit button
+
+        Actual Results:
+        ─	Character Count: 12
+        ─	Word Count: 2
+        ─	Unique Characters: 9
+        ─	TextView
+        ─	TextView
+        ─	Special Characters: 1
+
+        Expected Results
+        ─	Character Count: 12
+        ─	Word Count: 2
+        ─	Unique Characters: 9
+        ─	Unique Words: 2
+        ─	Longest Word: hello,
+        ─	Special Characters: 1
+
+    Entering “hello hello world”
+        Steps
+        1.	Enter “hello hello world”
+        2.	Click Submit button
+
+        Actual Results:
+        ─	Character Count: 17
+        ─	Word Count: 3
+        ─	Unique Characters: 8
+        ─	TextView
+        ─	TextView
+        ─	Special Characters: 0
+
+        Expected Results
+        ─	Character Count: 17
+        ─	Word Count: 3
+        ─	Unique Characters: 8
+        ─	Unique Words: 2
+        ─	Longest Word: hello
+        ─	Special Characters: 0
+
+    Entering “Ravenclaw wins the Cup!”
+        Steps
+        1.	Enter “Ravenclaw wins the Cup!”
+        2.	Click Submit button
+
+        Actual Results:
+        ─	Character Count: 23
+        ─	Word Count: 4
+        ─	Unique Characters: 17
+        ─	TextView
+        ─	TextView
+        ─	Special Characters: 1
+
+        Expected Results
+        ─	Character Count: 23
+        ─	Word Count: 4
+        ─	Unique Characters: 17
+        ─	Unique Words: 4
+        ─	Longest Word: Ravenclaw
+        ─	Special Characters: 1
+
+
+LOCATION OF THE BUG IN THE CODE
+─	Location of this bug is in AnalyzerActivity.java within the bindData() function.
+    There is no code to bind the number of Unique Words or the Longest Word to their corresponding views in activity_analyzer.xml.
+─	Changing this file will not affect any of the other files.
+
+DATE/TIME OF THE FIX & COMMIT LINK
+─	10/21/2017, 10:55pm, https://github.com/mleano/Assignment03_StringAnalyzer/commit/4849127b36a3111edd60da82229f08222eb20e71
+    o	Added code in bindData() to set the analyzed input results text into the Unique Words and Longest Word TextViews in the view
+
+=======================================================================================================
+
+*** BUG NO. 4 ***
+
+DESCRIPTION OF THE ISSUE
+─	Analyze another string button doesn’t take you back to the first screen (normal)
+
+REPRO STEPS
+    Steps
+    1.	Enter “hello”
+    2.	Click Submit button
+    3.	Click Analyze Another String button
+
+    Actual Results:
+    ─	Remains in the “Results” view
+
+    Expected Results
+    ─	Goes back to the “Enter Message” view
+
+LOCATION OF THE BUG IN THE CODE
+─	Location of this bug is in AnalyzerActivity.java within the bindData() function. There is no code to bind the an onClick listener to the button that will navigate back to the input view.
+─	Changing this file will not affect any of the other files.
+
+DATE/TIME OF THE FIX & COMMIT LINK
+─	10/21/2017, 11:12pm, https://github.com/mleano/Assignment03_StringAnalyzer/commit/8575d0403784aefcb8dba826601046f9f0799171
+    o	Attached an onClick listener to the "Analyze Another String" button. When clicked, it will navigate back to the Input view.
