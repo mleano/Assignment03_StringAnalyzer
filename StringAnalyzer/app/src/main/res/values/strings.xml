@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">StringAnalyzer</string>
+    <string name="error_no_msg">Please enter a message</string>
 </resources>
