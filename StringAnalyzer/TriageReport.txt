@@ -26,13 +26,13 @@ REPRO STEPS
     ─	App crashes and shuts down
 
     Expected Results
-    ─	Entered message and analyzed. Analysis is shown in another view.
+    ─	Entered message is analyzed. Analysis is shown in another view.
 
 LOCATION OF THE BUG IN THE CODE
-─	Android Monitor states at co.miniforge.corey.stringanalyzer.
-    InputActivity$1.onClick(InputActivity.java:37)
+─	Android Monitor states at co.miniforge.corey.stringanalyzer.InputActivity$1.onClick(InputActivity.java:37)
 ─	But bug actually at line 35 of InputActivity
-─	Changing this file will affect what string will be sent to AnalyzerActivity.java (and therefore TextAnalyzerUtil.java)
+─	Changing this file will affect what string will be sent to AnalyzerActivity.java (and will therefore affect
+    TextAnalyzerUtil.java)
 ─	Changing this file should not break the other files
 
 DATE/TIME OF THE FIX & COMMIT LINK
@@ -188,7 +188,8 @@ REPRO STEPS
     ─	Goes back to the “Enter Message” view
 
 LOCATION OF THE BUG IN THE CODE
-─	Location of this bug is in AnalyzerActivity.java within the bindData() function. There is no code to bind the an onClick listener to the button that will navigate back to the input view.
+─	Location of this bug is in AnalyzerActivity.java within the bindData() function. There is no code to bind
+    the an onClick listener to the button that will navigate back to the input view.
 ─	Changing this file will not affect any of the other files.
 
 DATE/TIME OF THE FIX & COMMIT LINK
